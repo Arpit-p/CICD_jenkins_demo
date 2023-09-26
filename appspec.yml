@@ -1,0 +1,14 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /node_app   # Destination directory on the target EC2 instance
+hooks:
+  BeforeInstall:
+    - location: before_start.sh   # Script to run before installing the application
+      timeout: 300   # Timeout for the script in seconds
+      runas: ec2-user
+  ApplicationStart:
+    - location: start_server.sh   # Script to start your application server
+      timeout: 300   # Timeout for the script in seconds
+      runas: ec2-user
